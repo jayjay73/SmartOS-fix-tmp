@@ -1,0 +1,30 @@
+--- /opt/local/lib/svc/method/mdata-fetch	2023-01-05 22:22:15.000000000 +0000
++++ /opt/local/lib/svc/method/mdata-fetch-NO-TMP	2024-06-12 22:14:32.847351441 +0000
+@@ -29,7 +29,7 @@
+ set -o xtrace
+ 
+ # Use platform script instead, if it exists
+-[ -f /lib/svc/method/mdata-fetch ] && exec /lib/svc/method/mdata-fetch $@
++#[ -f /lib/svc/method/mdata-fetch ] && exec /lib/svc/method/mdata-fetch $@
+ 
+ #
+ # The rest is legacy for platforms that do not come with its own
+@@ -162,16 +162,12 @@
+   check="swap        -   /tmp                tmpfs";
+   new="swap        -   /tmp                tmpfs    -   yes    size=${tmpfs}m";
+   if ! /usr/bin/grep "^${new}" /etc/vfstab; then
+-    if ! /usr/bin/grep "^${check}" /etc/vfstab; then
+-      # no tmpfs line. add it.
+-      echo "${new}" >> /etc/vfstab
+-    else
++    if /usr/bin/grep "^${check}" /etc/vfstab; then
+       # existing tmpfs line, but wrong value. fix it.
+       /usr/bin/sed -i "" -e "s|^swap.*/tmp.*tmpfs.*$|${new}|" /etc/vfstab
+       echo $?
++      /usr/sbin/mount -F tmpfs -o remount,size=${tmpfs}m /tmp
+     fi
+-    # also fix current size, since /etc/vfstab didn't have our correct line
+-    /usr/sbin/mount -F tmpfs -o remount,size=${tmpfs}m /tmp
+   fi
+ fi
+ 

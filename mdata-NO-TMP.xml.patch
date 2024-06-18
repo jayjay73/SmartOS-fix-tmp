@@ -1,0 +1,11 @@
+--- /opt/local/lib/svc/manifest/mdata.xml	2023-01-05 22:22:14.000000000 +0000
++++ /opt/local/lib/svc/manifest/mdata-NO-TMP.xml	2024-06-12 21:51:04.303114889 +0000
+@@ -13,7 +13,7 @@
+       <dependency name="boot-file" grouping="exclude_all" restart_on="refresh" type="path">
+         <service_fmri value="file://localhost/tmp/.FIRST_REBOOT_NOT_YET_COMPLETE"/>
+       </dependency>
+-      <exec_method type="method" name="start" exec="/opt/local/lib/svc/method/mdata-fetch" timeout_seconds="1800" />
++      <exec_method type="method" name="start" exec="/opt/local/lib/svc/method/mdata-fetch-NO-TMP" timeout_seconds="1800" />
+       <exec_method type="method" name="stop" exec=":true" timeout_seconds="60" />
+     </instance>
+     <instance name="execute" enabled="false">

@@ -1,0 +1,25 @@
+# vim
+.*.swp
+.*.swo
+
+# other editors' backup files
+*~
+
+# Lazarus / Freepascal
+*.exe
+*.res
+*.bak
+*.dbg
+*.trc
+/backup
+/lib
+gcConfig.txt
+
+# SSH private keys
+*id_rsa
+
+# the passwd system's  backups
+passwd-
+group-
+shadow-
+
