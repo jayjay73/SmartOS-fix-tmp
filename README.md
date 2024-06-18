@@ -1,8 +1,8 @@
 # Fix /tmp in SmartOS zones
 
-If you run SmartOS Zones on a SmartOS hypervisor the /tmp directory inside the yones will be mounted on tmpfs.
+If you run SmartOS Zones on a SmartOS hypervisor the /tmp directory inside the zones will be mounted on tmpfs.
 
-While this is OK in most use cases you will run into problems if you need filesystem features that Solaris/Illumos tmpfs does not provide, like ACLs. One such case is making sshd's forwarded agent socket available to other users. Unlike ssh-agent, which can be persuaded to use a different location for it's socket (-a option) this is not possible with sshd (the consuming side of an agent connection).
+In most use cases this is OK, but you will run into problems if you need filesystem features that Solaris/Illumos tmpfs does not provide, like ACLs. One such case is making sshd's forwarded agent socket available to other users. Unlike ssh-agent, which can be told to use a different location for it's socket (-a option) this is not possible with sshd (the consuming side of an agent connection).
 
 You can't just remove /tmp from /etc/vfstab either...
 
@@ -44,3 +44,4 @@ A SMF service instance (svc:/smartdc/mdata:fetch) re-creates the vfstab entry ev
     svcadm enable svc:/smartdc/mdata
     ```
 
+Reboot and check if /tmp is still a link to /var/tmp which is on ZFS so all FS features should be available.
