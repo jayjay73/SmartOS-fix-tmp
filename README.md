@@ -15,9 +15,8 @@ A SMF service instance (svc:/smartdc/mdata:fetch) re-creates the vfstab entry ev
     cp mdata-fetch-NO-TMP /opt/local/lib/svc/method/mdata-fetch-NO-TMP
     cp mdata-NO-TMP.xml /opt/local/lib/svc/manifest/mdata-NO-TMP.xml
     ```
-1. Stop, disable and then delete the mdata service
+1. Disable and then delete the mdata service
     ```
-    svcadm stop svc:/smartdc/mdata
     svcadm disable svc:/smartdc/mdata
     svccfg delete svc:/smartdc/mdata
     ```
